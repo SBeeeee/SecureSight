@@ -3,7 +3,7 @@ import prisma from "../config/database.js";
 export async function getIncidents(resolved) {
     return await prisma.incident.findMany({
         where: {
-          resolved: resolved === 'true' ? true : false
+          resolved: resolved,
         },
       })
     }
