@@ -18,7 +18,7 @@ export default function IncidentDetails() {
 
   const handleResolve = async (id, resolved) => {
     try {
-      await resolveIncident(id, !resolved); // toggle resolved state
+      await resolveIncident(id); 
       await loadIncidents();
     } catch (err) {
       console.error("Failed to update incident status:", err);
