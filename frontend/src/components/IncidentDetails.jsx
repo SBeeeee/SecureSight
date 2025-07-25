@@ -1,25 +1,35 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AlertTriangle, Plus, UserRoundSearchIcon, DoorOpen } from "lucide-react";
-import { fetchIncidents, resolveIncident } from "./api";
+import { fetchIncidents, resolveIncident,counts } from "./api";
+import { useDispatch,useSelector } from "react-redux";
+import { setIncidents,setResolved,setUnresolved } from "@/store/incidents/slice";
 
 export default function IncidentDetails() {
-  const [incidents, setIncidents] = useState([]);
+
+  const dispatch=useDispatch();
+  const {incidents,resolved,unresolved}=useSelector((state)=>state.incident)
   const [showResolved, setShowResolved] = useState(false);
 
   const loadIncidents = async () => {
     const data = await fetchIncidents(showResolved);
-    setIncidents(data);
+    dispatch(setIncidents(data));
   };
-
+  const handlecount=async()=>{
+    const data =await counts();
+    dispatch(setResolved(data.counts.resolved));
+    dispatch(setUnresolved(data.counts.unresolved));
+  }
   useEffect(() => {
     loadIncidents();
-  }, [showResolved]);
+    handlecount();
+  }, [showResolved,resolved,unresolved]);
 
-  const handleResolve = async (id, resolved) => {
+  const handleResolve = async (id) => {
     try {
       await resolveIncident(id); 
       await loadIncidents();
+      await handlecount();
     } catch (err) {
       console.error("Failed to update incident status:", err);
     }
@@ -31,7 +41,7 @@ export default function IncidentDetails() {
         <div className="flex items-center gap-1">
           <AlertTriangle size={26} className="text-red-400 bg-red-900 rounded-full p-1" />
           <h2 className="text-white font-semibold text-md">
-            {showResolved ? `${incidents.length} Resolved` : `${incidents.length} Unresolved`}
+            {showResolved ? `${resolved} Resolved` : `${unresolved} Unresolved`}
           </h2>
         </div>
 

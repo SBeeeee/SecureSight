@@ -23,5 +23,5 @@ const incidentSlice=createSlice({
 
 })
 
-export const {setResolved,setUnresolved}=incidentSlice.actions;
+export const {setResolved,setUnresolved,setIncidents}=incidentSlice.actions;
 export default incidentSlice.reducer;
