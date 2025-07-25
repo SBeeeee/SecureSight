@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState={
     unresolved:"",
     resolved:"",
+    incidents:[],
 }
 
 const incidentSlice=createSlice({
@@ -14,6 +15,9 @@ const incidentSlice=createSlice({
         },
         setUnresolved:(state,action)=>{
             state.unresolved=action.payload;
+        },
+        setIncidents:(state,action)=>{
+            state.incidents=action.payload;
         }
     }
 
