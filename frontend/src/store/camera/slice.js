@@ -20,4 +20,4 @@ const cameraSlice=createSlice({
 })
 
 export const {setCamera,setMainCamera}=cameraSlice.actions;
-export default incidentSlice.reducer;
+export default cameraSlice.reducer;
