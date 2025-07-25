@@ -36,6 +36,7 @@ export default function IncidentDetails() {
             {/* Info */}
             <div className="flex-1 text-xs">
               <div className="font-medium text-yellow-400">Unauthorized Access</div>
+            <br></br>
               <div className="text-gray-400">Safe Room</div>
               <div className="text-gray-500">24 Jul 2025 | 07:13 AM</div>
             </div>
