@@ -22,3 +22,17 @@ export async function toggleResolved(id) {
         return updated
       }
       
+      export async function getIncidentCounts() {
+        const resolvedCount = await prisma.incident.count({
+          where: { resolved: true },
+        });
+      
+        const unresolvedCount = await prisma.incident.count({
+          where: { resolved: false },
+        });
+      
+        return {
+          resolved: resolvedCount,
+          unresolved: unresolvedCount,
+        };
+      }      

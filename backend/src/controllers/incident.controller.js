@@ -1,4 +1,4 @@
-import { getIncidents,toggleResolved } from "../Services/incident.services.js";
+import { getIncidents,toggleResolved,getIncidentCounts } from "../Services/incident.services.js";
 
 export async function fetchIncidents(req, res) {
     try {
@@ -36,5 +36,23 @@ export async function resolveIncident(req, res) {
         message:"Issue faced to change resolve status",
 
         })
+    }
+  }
+  
+export async function fetchIncidentCounts(req, res) {
+    try {
+      const counts = await getIncidentCounts();
+      res.status(200).json({
+        success: true,
+        message: "Incident counts fetched",
+        counts,
+      });
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({
+        error: err.message,
+        success: false,
+        message: "Failed to fetch incident counts",
+      });
     }
   }
