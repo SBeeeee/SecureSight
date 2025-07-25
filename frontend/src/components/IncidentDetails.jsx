@@ -36,7 +36,7 @@ export default function IncidentDetails() {
   };
 
   return (
-    <div className="w-[45%] md:w-1/3 bg-[#1A1A1A] text-white p-4 rounded-md">
+    <div className=" pw-full md:w-[45%] h-full bg-[#1A1A1A] text-white p-4 rounded-md overflow-hidden">
       <div className="flex items-center justify-between mb-4 border-b border-gray-600 pb-2">
         <div className="flex items-center gap-1">
           <AlertTriangle size={26} className="text-red-400 bg-red-900 rounded-full p-1" />
@@ -58,7 +58,7 @@ export default function IncidentDetails() {
         </div>
       </div>
 
-      <div className="h-[361px] overflow-y-scroll pr-4">
+      <div className="overflow-y-scroll h-[428px] pr-4">
         {incidents.map((incident) => (
           <div
             key={incident.id}
