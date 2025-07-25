@@ -1,4 +1,5 @@
 // components/CameraFeed.tsx
+import { CircleDot } from "lucide-react";
 export default function CameraFeed() {
     return (
       <div className="w-[45%] md:w-2/3 p-4 relative">
@@ -16,19 +17,22 @@ export default function CameraFeed() {
           </div>
   
           {/* Bottom Left: Camera Tag */}
-          <div className="absolute bottom-2 left-2 bg-red-600 text-white text-xs font-medium px-2 py-1 rounded">
-            Camera - 03
+          <div className="absolute bottom-2 left-2 bg-slate-950 flex gap-1 items-center text-white text-xs font-medium px-2 py-1 rounded">
+           <CircleDot size={12} className="text-red-600 font-semibold"/> Camera - 03
           </div>
   
           {/* Bottom Right: Mini camera previews */}
           <div className="absolute bottom-2 right-2 flex gap-2">
             {[1, 2].map((id) => (
+              <div key={id}>
+                <div className="bg-black text-sm font-light text-white ">Camera-01</div>
               <img
-                key={id}
+                
                 src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn3OhbgshmMn0uH2ire-QfaUpYwDfAiagvMw&s`}
-                className="w-[100px] h-[60px] object-cover rounded-sm border border-white"
+                className="w-[140px] h-[75px] object-cover  "
                 alt={`Preview ${id}`}
               />
+              </div>
             ))}
           </div>
         </div>
