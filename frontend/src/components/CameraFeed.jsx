@@ -1,13 +1,13 @@
 // components/CameraFeed.tsx
 export default function CameraFeed() {
     return (
-      <div className="w-full md:w-2/3 p-4 relative">
+      <div className="w-[45%] md:w-2/3 p-4 relative">
         <div className="relative rounded-md overflow-hidden shadow-md">
           {/* Main Camera Feed Image */}
           <img
             src="https://media.istockphoto.com/id/1496748127/photo/home-security-camera-footage-of-package-delivery.webp?a=1&b=1&s=612x612&w=0&k=20&c=5yMH-Rz56_VhEo6sEvD-mz2Gri4vjBFqSCRoQo5X0RI="
             alt="Main Camera Feed"
-            className="w-full h-[400px] object-cover"
+            className="w-full object-cover"
           />
   
           {/* Top Left: Date and Time */}

@@ -1,11 +1,26 @@
 // components/IncidentDetails.tsx
+import { AlertTriangle,Plus,UserRoundSearchIcon,DoorOpen} from "lucide-react";
 export default function IncidentDetails() {
     return (
-      <div className="w-full md:w-1/3 bg-[#1A1A1A] text-white p-4 rounded-md h-[500px] overflow-y-auto">
-        <h2 className="text-sm font-semibold mb-4 border-b border-gray-600 pb-2">
-          15 Unresolved Incidents
-        </h2>
-  
+      <div className="w-[45%] md:w-1/3 bg-[#1A1A1A] text-white p-4 rounded-md">
+           <div className="flex items-center justify-between mb-4 border-b border-gray-600 pb-2">
+      
+        <div className="flex items-center gap-1">
+          <AlertTriangle size={26} className="text-red-400 bg-red-900 rounded-full p-1" />
+          <h2 className="text-while font-semibold text-md"> 15 Unresolved</h2>
+        </div>
+
+    
+    <div className="flex items-center ">
+          <Plus size={16 }className="text-white hover:text-yellow-400 cursor-pointer" />
+          <UserRoundSearchIcon size={16 }className="text-white hover:text-yellow-400 cursor-pointer" />
+          <DoorOpen size={16}className="text-white hover:text-yellow-400 cursor-pointer" />
+          <span className="text-white text-sm bg-black border-[#404040] border rounded-2xl px-2 py-1 ">4 resolved incidents</span>
+        </div>
+      </div>
+
+
+        <div className="h-[361px] overflow-y-scroll pr-4">
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
@@ -29,6 +44,7 @@ export default function IncidentDetails() {
             <button className="text-blue-400 text-xs hover:underline">Resolve</button>
           </div>
         ))}
+        </div>
       </div>
     );
   }
