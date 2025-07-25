@@ -1,15 +1,29 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AlertTriangle, Plus, UserRoundSearchIcon, DoorOpen } from "lucide-react";
-import { fetchIncidents } from "./api";
+import { fetchIncidents, resolveIncident } from "./api";
 
 export default function IncidentDetails() {
   const [incidents, setIncidents] = useState([]);
   const [showResolved, setShowResolved] = useState(false);
 
+  const loadIncidents = async () => {
+    const data = await fetchIncidents(showResolved);
+    setIncidents(data);
+  };
+
   useEffect(() => {
-    fetchIncidents(showResolved).then(setIncidents);
+    loadIncidents();
   }, [showResolved]);
+
+  const handleResolve = async (id, resolved) => {
+    try {
+      await resolveIncident(id, !resolved); // toggle resolved state
+      await loadIncidents();
+    } catch (err) {
+      console.error("Failed to update incident status:", err);
+    }
+  };
 
   return (
     <div className="w-[45%] md:w-1/3 bg-[#1A1A1A] text-white p-4 rounded-md">
@@ -29,7 +43,7 @@ export default function IncidentDetails() {
             onClick={() => setShowResolved((prev) => !prev)}
             className="text-white text-sm bg-black border-[#404040] border rounded-2xl px-2 py-1 cursor-pointer"
           >
-            {showResolved ? "Show Unresolved" : "4 resolved incidents"}
+            {showResolved ? "Show Unresolved" : "Show Resolved"}
           </span>
         </div>
       </div>
@@ -62,9 +76,13 @@ export default function IncidentDetails() {
                 })}
               </div>
             </div>
-            {!showResolved && (
-              <button className="text-blue-400 text-xs hover:underline">Resolve</button>
-            )}
+
+            <button
+              className="text-blue-400 text-xs hover:underline cursor-pointer"
+              onClick={() => handleResolve(incident.id, showResolved)}
+            >
+              {showResolved ? "Reopen" : "Resolve"}
+            </button>
           </div>
         ))}
       </div>

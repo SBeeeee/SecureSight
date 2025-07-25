@@ -12,3 +12,13 @@ export async function fetchIncidents(resolved = false) {
     return [];
   }
 }
+
+export async function resolveIncident(id) {
+    try {
+      const res = await axiosInstance.patch(`/incidents/${id}/resolve`);
+      return res.data;
+    } catch (error) {
+      console.error("Error resolving incident:", error);
+      throw error;
+    }
+}  
