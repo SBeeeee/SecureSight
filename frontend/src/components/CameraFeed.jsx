@@ -1,5 +1,5 @@
 // components/CameraFeed.tsx
-import { CircleDot } from "lucide-react";
+import { CircleDot,CalendarDays } from "lucide-react";
 export default function CameraFeed() {
     return (
       <div className="w-[45%] md:w-2/3 p-4 relative">
@@ -12,8 +12,8 @@ export default function CameraFeed() {
           />
   
           {/* Top Left: Date and Time */}
-          <div className="absolute top-2 left-2 bg-gray-800 text-white text-xs px-2 py-1 rounded">
-            07:15:22 AM | 24-07-2025
+          <div className="absolute gap-2 flex items-center top-2 left-2 bg-gray-800 text-white text-xs px-2 py-1 rounded">
+            <CalendarDays size={16} className="text-slate-500"/> 07:15:22 AM | 24-07-2025
           </div>
   
           {/* Bottom Left: Camera Tag */}
