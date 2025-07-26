@@ -33,3 +33,30 @@ export async function counts(){
       throw error;
   }
 }
+
+export async function loginUser({ email, password }) {
+  const res = await axiosInstance.post("/user/login", { email, password });
+  return res.data;
+}
+
+export async function registerUser({ name, email, password }) {
+  const res = await axiosInstance.post("/user/register", { name, email, password });
+  return res.data;
+}
+
+export async function logoutUser() {
+  const res = await axiosInstance.post("/user/logout");
+  return res.data;
+}
+
+export async function getMe() {
+  const token = localStorage.getItem("token");
+
+  const res = await axiosInstance.get("/user/getme", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data;
+}

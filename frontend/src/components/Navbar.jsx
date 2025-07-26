@@ -5,6 +5,7 @@ import {
   AlertTriangle,
   Users
 } from 'lucide-react';
+import UIavatar from './UIavatar';
 
 export default function Navbar() {
   return (
@@ -45,15 +46,8 @@ export default function Navbar() {
           </div>
 
           {/* Right: User Info */}
-          <div className="flex items-center gap-3 text-right">
-            <div className="text-[11px] leading-tight hidden md:block">
-              <div className="text-white font-medium">Mohammed Ajmal</div>
-              <div className="text-gray-400">Super Administrator</div>
-            </div>
-            <div className="w-7 h-7 bg-gray-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
-              M
-            </div>
-          </div>
+         
+         <UIavatar/>
         </div>
       </div>
     </nav>
