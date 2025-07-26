@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from  "cors";
 import incidentrouter from './src/routes/incident.routes.js'
 import camerarouter from './src/routes/camera.routes.js'
+import userrouter from './src/routes/user.routes.js'
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use("/api/incidents",incidentrouter);
 app.use("/api/camera",camerarouter);
+app.use("/api/user",userrouter);
 
 app.listen(PORT,()=>{
     console.log("Server is running on http://localhost:" + PORT);
