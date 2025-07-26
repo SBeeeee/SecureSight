@@ -25,7 +25,7 @@ export default function UIavatar() {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 bg-gray-800 text-white px-3 py-1 rounded-full shadow hover:bg-gray-700 transition"
+        className="flex items-center gap-1 hover:cursor-pointer bg-gray-800 text-white px-3 py-1 rounded-full shadow hover:bg-gray-700 transition"
       >
         <div className="w-8 h-8 rounded-full bg-gray-200 text-black flex items-center justify-center text-sm">
           {isAuthenticated ? initials : <UserCircle2 className="w-4 h-4" />}
@@ -34,7 +34,7 @@ export default function UIavatar() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl z-50 p-3 text-sm">
+        <div className="absolute right-0 mt-2 w-56 bg-slate-400 rounded-lg shadow-xl z-50 p-3 text-sm">
           {isAuthenticated ? (
             <>
               <div className="mb-2 border-b pb-2">
@@ -52,13 +52,13 @@ export default function UIavatar() {
             <>
               <button
                 onClick={() => router.push("/login")}
-                className="w-full text-left hover:bg-gray-100 rounded px-2 py-1"
+                className="w-full text-left hover:bg-gray-100 text-black font-semibold hover:cursor-pointer rounded px-2 py-1"
               >
                 Login
               </button>
               <button
                 onClick={() => router.push("/register")}
-                className="w-full text-left hover:bg-gray-100 rounded px-2 py-1"
+                className="w-full text-left hover:bg-gray-100 text-black font-semibold hover:cursor-pointer rounded px-2 py-1"
               >
                 Sign up
               </button>
