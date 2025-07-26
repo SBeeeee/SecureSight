@@ -60,7 +60,7 @@ export default function LoginPage() {
           onClick={() => router.push("/register")}
           className="text-sm text-center text-blue-700 hover:underline cursor-pointer"
         >
-          {Don't have an account? Register}
+          {"Don't have an account? Register"}
         </p>
       </form>
     </div>
