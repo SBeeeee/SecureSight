@@ -7,6 +7,8 @@ import {
   DoorOpen,
   Crosshair,
   ChevronRight,
+  Cctv,
+  Clock,
 } from "lucide-react";
 import { fetchIncidents, resolveIncident, counts } from "./api";
 import { useDispatch, useSelector } from "react-redux";
@@ -114,8 +116,11 @@ export default function IncidentDetails() {
                 {incident.type}
               </div>
               <br />
-              <div className="text-gray-400">Camera ID: {incident.cameraId}</div>
-              <div className="text-gray-500">
+              <div className="flex items-center gap-1 text-white">
+                <Cctv size={14}/> Camera ID: {incident.cameraId}
+              </div>
+              <div className="flex items-center gap-1 text-white">
+                <Clock size={14}/>
                 {new Date(incident.timestamp).toLocaleDateString("en-GB", {
                   day: "2-digit",
                   month: "short",
