@@ -13,7 +13,7 @@ This technical assessment focuses on building the **dashboard frontend** and **b
 | ------------ | ------------------------ |
 | Frontend     | Next.js App Router, TailwindCSS, Framer Motion |
 | Backend      | Express.js, Prisma ORM   |
-| Database     | SQLite (dev), PostgreSQL-ready |
+| Database     | Neon-DB, PostgreSQL |
 | Auth         | JWT-based API route protection |
 | Deployment   | Vercel (frontend), Render (backend) |
 
@@ -83,7 +83,7 @@ Implemented simple JWT-based auth for protected flows:
 cd backend
 npm install
 npx prisma db push
-npm run dev
+npx nodemon app.js
 ```
 
 ### Frontend
@@ -145,17 +145,6 @@ While most of the extra features were already implemented, here are things I’d
 - 📦 **Production-Grade Auth**  
   Replace stubbed auth with real user login, signup, and role support.
   Since I am not getting paid domains for frontend and backend token in localstorage system has been used or else accesstoken,refreshtoken,csurf-token system using sameSite cookie settings could have been used for more security
-
----
-
-## 📮 Submission
-
-🔗 [Technical Assessment Submission](https://instinctive-studio.notion.site/2f94e658b574978b9f846e4745f35a21?pvs=105)
-
-Includes:
-- ✅ Public GitHub repository
-- ✅ Live deployed links (Vercel + Render)
-- ✅ This README with all implementation details
 
 ---
 
