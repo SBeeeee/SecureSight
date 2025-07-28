@@ -19,7 +19,7 @@ export default function UIavatar() {
     router.push("/login");
   };
 
-  const initials = user?.name?.[0]?.toUpperCase() || "";
+  const initials = isAuthenticated && user?.name?.[0]?.toUpperCase() || "";
 
   return (
     <div className="relative inline-block text-left">

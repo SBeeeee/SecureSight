@@ -6,8 +6,8 @@ const token = typeof window !== "undefined" ? localStorage.getItem("token") : nu
 
 const initialState = {
   token: token || null,
-  user:  null,
-  isAuthenticated: !!token,
+  user:  {},
+  isAuthenticated: false,
 };
 
 const userSlice = createSlice({
