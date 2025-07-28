@@ -24,10 +24,16 @@ export default function IncidentDetails() {
     (state) => state.incident
   );
   const [showResolved, setShowResolved] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loadIncidents = async () => {
-    const data = await fetchIncidents(showResolved);
-    dispatch(setIncidents(data));
+    setLoading(true);
+    try {
+      const data = await fetchIncidents(showResolved);
+      dispatch(setIncidents(data));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlecount = async () => {
@@ -42,12 +48,15 @@ export default function IncidentDetails() {
   }, [showResolved, resolved, unresolved]);
 
   const handleResolve = async (id) => {
+    setLoading(true);
     try {
       await resolveIncident(id);
       await loadIncidents();
       await handlecount();
     } catch (err) {
       console.error("Failed to update incident status:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,7 +74,8 @@ export default function IncidentDetails() {
   };
 
   return (
-    <div className="pw-full md:w-[45%] h-full bg-[#1A1A1A] text-white p-4 rounded-md overflow-hidden">
+    <div className="pw-full md:w-[45%] h-full bg-[#1A1A1A] text-white p-4 rounded-md overflow-hidden relative">
+      {/* Header */}
       <div className="flex items-center justify-between mb-4 border-b border-gray-600 pb-2">
         <div className="flex items-center gap-1">
           <AlertTriangle
@@ -99,51 +109,58 @@ export default function IncidentDetails() {
         </div>
       </div>
 
-      <div className="overflow-y-scroll h-[428px] pr-4">
-        {incidents.map((incident) => (
-          <div
-            key={incident.id}
-            className="flex items-start gap-3 mb-4 border-b border-gray-700 pb-3"
-          >
-            <img
-              src={incident.thumbnail}
-              alt="Incident"
-              className="w-20 h-16 object-cover rounded"
-            />
-            <div className="flex-1 text-xs">
-              <div className="flex items-center gap-1 font-bold text-white">
-                {getIconForType(incident.type)}
-                {incident.type}
-              </div>
-              <br />
-              <div className="flex items-center gap-1 text-white">
-                <Cctv size={14}/> Camera ID: {incident.cameraId}
-              </div>
-              <div className="flex items-center gap-1 text-white">
-                <Clock size={14}/>
-                {new Date(incident.timestamp).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}{" "}
-                |{" "}
-                {new Date(incident.timestamp).toLocaleTimeString("en-GB", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </div>
-            </div>
-
-            <button
-              className="flex items-center gap-1 text-yellow-400 text-xs hover:underline cursor-pointer"
-              onClick={() => handleResolve(incident.id)}
+      {/* Content */}
+      {loading ? (
+        <div className="flex justify-center items-center h-[428px] w-full">
+          <div className="w-6 h-6 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin" />
+        </div>
+      ) : (
+        <div className="w-full h-[428px] pr-4 overflow-y-auto">
+          {incidents.map((incident) => (
+            <div
+              key={incident.id}
+              className="flex items-start gap-3 mb-4 border-b border-gray-700 pb-3"
             >
-              {showResolved ? "Reopen" : "Resolve"}
-              <ChevronRight size={14} />
-            </button>
-          </div>
-        ))}
-      </div>
+              <img
+                src={incident.thumbnail}
+                alt="Incident"
+                className="w-20 h-16 object-cover rounded"
+              />
+              <div className="flex-1 text-xs">
+                <div className="flex items-center gap-1 font-bold text-white">
+                  {getIconForType(incident.type)}
+                  {incident.type}
+                </div>
+                <br />
+                <div className="flex items-center gap-1 text-white">
+                  <Cctv size={14} /> Camera ID: {incident.cameraId}
+                </div>
+                <div className="flex items-center gap-1 text-white">
+                  <Clock size={14} />
+                  {new Date(incident.timestamp).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}{" "}
+                  |{" "}
+                  {new Date(incident.timestamp).toLocaleTimeString("en-GB", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+              </div>
+
+              <button
+                className="flex items-center gap-1 text-yellow-400 text-xs hover:underline cursor-pointer"
+                onClick={() => handleResolve(incident.id)}
+              >
+                {showResolved ? "Reopen" : "Resolve"}
+                <ChevronRight size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
